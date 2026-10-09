@@ -1,0 +1,62 @@
+{
+  "farms": [
+    {
+      "id": "farm-1",
+      "name": "Green Acres",
+      "ownerName": "Ramesh Kumar",
+      "area": 12.5,
+      "cropType": "Wheat",
+      "status": "Mapped",
+      "createdAt": "2026-10-09T17:40:42.696Z",
+      "location": {
+        "lat": 20.5937,
+        "lng": 78.9629
+      },
+      "readinessScore": 75
+    },
+    {
+      "name": "QA Farm",
+      "ownerName": "QA Tester",
+      "area": 50.5,
+      "cropType": "Rice",
+      "id": "farm-1791567756607",
+      "status": "Pending",
+      "createdAt": "2026-10-09T17:42:36.607Z",
+      "location": {
+        "lat": 20.5937,
+        "lng": 78.9629
+      },
+      "readinessScore": 25
+    }
+  ],
+  "fpos": [
+    {
+      "id": "fpo-1",
+      "name": "Vidhya Farmers FPO",
+      "farmsCount": 124
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-1",
+      "farmId": "farm-1",
+      "action": "Farm registered in Vidhya FPO",
+      "timestamp": "2026-10-09T17:40:42.696Z",
+      "type": "registration"
+    },
+    {
+      "id": "act-2",
+      "farmId": "farm-1",
+      "action": "Land title evidence uploaded",
+      "timestamp": "2026-10-09T17:40:42.696Z",
+      "type": "evidence"
+    },
+    {
+      "id": "act-3",
+      "farmId": "farm-1791567756607",
+      "action": "Farm QA Farm registered",
+      "timestamp": "2026-10-09T17:42:36.607Z",
+      "type": "registration"
+    }
+  ]
+}
