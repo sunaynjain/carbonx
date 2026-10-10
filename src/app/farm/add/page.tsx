@@ -14,7 +14,18 @@ export default function AddFarmPage() {
     ownerName: '',
     area: '',
     cropType: '',
+    location: { lat: 20.5937, lng: 78.9629 },
+    geometry: null as unknown
   });
+
+  const handlePolygonDrawn = (geoJSON: unknown, areaSqm: number) => {
+    const areaAcres = (areaSqm / 4046.86).toFixed(2);
+    setFormData(prev => ({
+      ...prev,
+      geometry: geoJSON,
+      area: areaAcres
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,14 +39,11 @@ export default function AddFarmPage() {
       const res = await fetch('/api/farms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          location: { lat: 20.5937, lng: 78.9629 } // Demo center point
-        })
+        body: JSON.stringify(formData)
       });
       
       if (res.ok) {
-        alert('Farm registered successfully (Demo)');
+        alert('Farm registered successfully');
         router.push('/farm');
       } else {
         alert('Failed to register farm');
@@ -141,10 +149,20 @@ export default function AddFarmPage() {
 
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-              <h3 className="text-xl font-serif text-forest-deep border-b border-border-subtle pb-2">Location & Boundary</h3>
-              <p className="text-sm text-text-muted">Pin the approximate location of the farm. In a full implementation, you would draw GeoJSON boundaries here.</p>
+              <div className="flex justify-between items-end border-b border-border-subtle pb-2">
+                <h3 className="text-xl font-serif text-forest-deep">Location & Boundary</h3>
+                {formData.geometry && (
+                  <span className="text-sm bg-forest/10 text-forest px-3 py-1 rounded-full font-medium">
+                    Auto-calculated Area: {formData.area} Acres
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-text-muted">Use the polygon tool on the map to draw the farm boundary. The area will be automatically calculated.</p>
               <div className="h-[400px] bg-surface-muted rounded-xl border border-border-subtle relative z-0 overflow-hidden shadow-inner">
-                <LeafletMap />
+                <LeafletMap 
+                  drawingEnabled={true} 
+                  onPolygonDrawn={handlePolygonDrawn} 
+                />
               </div>
             </div>
           )}
@@ -168,6 +186,10 @@ export default function AddFarmPage() {
                 <div>
                   <p className="text-sm text-text-muted">Crop</p>
                   <p className="font-medium text-forest-deep">{formData.cropType}</p>
+                </div>
+                <div className="col-span-2">
+                  <p className="text-sm text-text-muted">Boundary Mapped</p>
+                  <p className="font-medium text-forest-deep">{formData.geometry ? 'Yes (GeoJSON attached)' : 'No (Manual Entry)'}</p>
                 </div>
               </div>
               <div className="p-4 bg-gold/10 border border-gold/20 rounded-xl text-sm flex items-start text-forest-deep">

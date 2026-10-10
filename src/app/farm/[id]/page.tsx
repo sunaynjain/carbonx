@@ -84,7 +84,7 @@ export default function FarmDetail({ params }: { params: Promise<{ id: string }>
           
           <div className="bg-surface rounded-2xl shadow-sm border border-border-subtle overflow-hidden">
             <div className="h-[350px] relative z-0">
-              <LeafletMap />
+              <LeafletMap farms={[farm]} selectedFarmId={farm.id} />
             </div>
             <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-6 bg-surface-muted/30">
               <div>

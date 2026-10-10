@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Map, Users, Globe, FileBarChart, Settings, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Map, Users, Globe, FileBarChart, Settings, Menu, X, Camera, MessageSquare, FileText, Network, Handshake, Briefcase, DollarSign } from 'lucide-react';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,13 +15,17 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Farms', href: '/farm', icon: Map },
+    { name: 'Farms & Map', href: '/farm', icon: Map },
     { name: 'FPOs', href: '/fpo', icon: Users },
-    { name: 'Carbon Intelligence', href: '/intelligence', icon: Globe },
+    { name: 'Intelligence', href: '/intelligence', icon: Globe },
+    { name: 'Monitoring', href: '/monitoring', icon: Camera },
+    { name: 'AI Advisor', href: '/advisor', icon: MessageSquare },
+    { name: 'Documents', href: '/documents', icon: FileText },
+    { name: 'Aggregation', href: '/aggregation', icon: Network },
+    { name: 'Matching', href: '/matching', icon: Handshake },
+    { name: 'Projects', href: '/projects', icon: Briefcase },
     { name: 'MRV & Reports', href: '/mrv', icon: FileBarChart },
-    { name: 'Journey', href: '/journey', icon: Map }, // Reusing Map icon or could import another
-    { name: 'Simulator', href: '/simulator', icon: Settings },
-    { name: 'Regional Map', href: '/region', icon: Map },
+    { name: 'Earnings', href: '/earnings', icon: DollarSign },
   ];
 
   return (

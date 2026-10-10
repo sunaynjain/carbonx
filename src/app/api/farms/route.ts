@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       ownerName: body.ownerName,
       area: Number(body.area),
       cropType: body.cropType || 'Unknown',
-      location: body.location
+      location: body.location || { lat: 20.5937, lng: 78.9629 },
+      geometry: body.geometry
     });
     
     return NextResponse.json({ farm: newFarm }, { status: 201 });

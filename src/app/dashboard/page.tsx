@@ -113,7 +113,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="h-[400px] w-full z-0 relative">
-              <LeafletMap />
+              <LeafletMap farms={data.farms} />
             </div>
           </div>
 
